@@ -1,0 +1,12 @@
+provider "aws" {
+  region = "us-east-1"
+}
+
+# Allocate Elastic IP
+resource "aws_eip" "devops_eip" {
+  domain = "vpc"
+
+  tags = {
+    Name = "devops-eip"
+  }
+}
