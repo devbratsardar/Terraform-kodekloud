@@ -1,0 +1,22 @@
+provider "aws" {
+  region = "us-east-1"
+}
+
+# Generate RSA private key
+resource "tls_private_key" "datacenter" {
+  algorithm = "RSA"
+  rsa_bits  = 2048
+}
+
+# Create AWS key pair
+resource "aws_key_pair" "datacenter" {
+  key_name   = "datacenter_kp"
+  public_key = tls_private_key.datacenter.public_key_openssh
+}
+
+# Save private key locally at required path
+resource "local_file" "private_key" {
+  filename        = "/home/bob/datacenter_kp.pem"
+  content         = tls_private_key.datacenter.private_key_pem
+  file_permission = "0400"
+}
