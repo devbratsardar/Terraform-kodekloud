@@ -1,0 +1,37 @@
+provider "aws" {
+  region = "us-east-1"
+}
+
+# Fetch default VPC
+data "aws_vpc" "default" {
+  default = true
+}
+
+# Create Security Group
+resource "aws_security_group" "xfusion_sg" {
+  name        = "xfusion-sg"
+  description = "Security group for Nautilus App Servers"
+  vpc_id      = data.aws_vpc.default.id
+
+  # HTTP rule
+  ingress {
+    description = "Allow HTTP"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  # SSH rule
+  ingress {
+    description = "Allow SSH"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "xfusion-sg"
+  }
+}
