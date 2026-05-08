@@ -1,0 +1,8 @@
+provider "aws" {
+  region = "us-east-1"
+}
+
+# Create IAM Group Using Terraform
+resource "aws_iam_group" "iamgroup_ravi" {
+  name = "iamgroup_ravi"
+}
