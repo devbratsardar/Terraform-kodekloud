@@ -1,0 +1,5 @@
+resource "aws_ssm_parameter" "xfusion_ssm_parameter" {
+  name  = "xfusion-ssm-parameter"
+  type  = "String"
+  value = "xfusion-value"
+}
