@@ -1,0 +1,10 @@
+# create CloudWatch log group
+resource "aws_cloudwatch_log_group" "xfusion_log_group" {
+  name = "xfusion-log-group"
+}
+
+# create CloudWatch log stream
+resource "aws_cloudwatch_log_stream" "xfusion_log_stream" {
+  name           = "xfusion-log-stream"
+  log_group_name = aws_cloudwatch_log_group.xfusion_log_group.name
+}
