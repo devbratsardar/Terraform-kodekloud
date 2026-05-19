@@ -1,0 +1,18 @@
+resource "aws_cloudformation_stack" "nautilus_stack" {
+  name = "nautilus-stack"
+
+  template_body = jsonencode({
+    AWSTemplateFormatVersion = "2010-09-09"
+    Resources = {
+      NautilusBucket = {
+        Type = "AWS::S3::Bucket"
+        Properties = {
+          BucketName = "nautilus-bucket-18142"
+          VersioningConfiguration = {
+            Status = "Enabled"
+          }
+        }
+      }
+    }
+  })
+}
